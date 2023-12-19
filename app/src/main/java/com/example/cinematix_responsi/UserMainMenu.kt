@@ -3,21 +3,20 @@ package com.example.cinematix_responsi
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.example.cinematix_responsi.databinding.ActivityHomeBinding
+import com.example.cinematix_responsi.databinding.ActivityUserMainMenuBinding
 
-class HomeActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityHomeBinding
+class UserMainMenu : AppCompatActivity() {
+    private lateinit var binding: ActivityUserMainMenuBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
+        binding = ActivityUserMainMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
         replaceFragment(HomeFragment())
 
         binding.bottomNavBar.setOnItemSelectedListener{
             when(it.itemId){
                 R.id.navHome -> replaceFragment(HomeFragment())
-                R.id.navOrder -> replaceFragment(OrderFragment())
                 R.id.navProfile -> replaceFragment(ProfileFragment())
 
                 else -> {}

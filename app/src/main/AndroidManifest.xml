@@ -25,7 +25,7 @@
             android:name=".MovieDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".UserMainMenu"
             android:exported="false" />
         <activity
             android:name=".SplashActivity"

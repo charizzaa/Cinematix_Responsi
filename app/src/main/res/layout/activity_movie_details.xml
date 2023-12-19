@@ -48,7 +48,7 @@
                 android:src="@drawable/thegreatestshowman"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
-                android:id="@+id/showman">
+                android:id="@+id/detailImg">
             </ImageView>
 
             <RelativeLayout
@@ -66,13 +66,13 @@
                     android:layout_marginTop="10dp"
                     android:textSize="20dp"
                     android:textColor="@color/black"
-                    android:id="@+id/titleshowman">
+                    android:id="@+id/detailTitle">
                 </TextView>
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/titleshowman"
+                android:layout_below="@id/detailTitle"
                 android:id="@+id/detail"
                 android:gravity="center_horizontal">
                 <TextView
@@ -82,42 +82,17 @@
                     android:text="Director: Michael Gracey"
                     android:layout_marginTop="10dp"
                     android:textSize="14dp"
-                    android:textColor="@color/black">
+                    android:textColor="@color/black"
+                    android:id="@+id/detailAuthor">
                 </TextView>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="|"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="200dp"
-                    android:textSize="14dp"
-                    android:textColor="@color/black">
-                </TextView>
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/star_rate"
-                    android:layout_marginLeft="220dp"
-                    android:layout_centerVertical="true"
-                    android:paddingTop="5dp">
-                </ImageView>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="9.7"
-                    android:fontFamily="@font/poppins_regular"
-                    android:layout_marginLeft="250dp"
-                    android:layout_centerVertical="true"
-                    android:paddingTop="10dp">
-                </TextView>
+
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/genre"
                 android:layout_below="@+id/detail"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:gravity="center_horizontal">
                 <TextView
                     android:layout_width="wrap_content"
@@ -169,7 +144,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="ncoiewofawin"
+                    android:id="@+id/detailDescription"
+                    android:text="showmannn"
                     android:layout_below="@id/storyline">
                 </TextView>
             </RelativeLayout>
