@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ProfileFragment"
+    android:background="@color/darkbrown">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_extrabold"
+            android:textSize="34sp"
+            android:text="Welcome!"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/prime"
+            android:layout_marginBottom="20dp">
+        </TextView>
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/profile">
+        </ImageView>
+        <TextView
+            android:id="@+id/tvUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="cacantik"
+            android:textSize="28sp"
+            android:textColor="@color/prime"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp">
+        </TextView>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroundTint="#B80000"
+            android:text="Log Out"
+            android:fontFamily="@font/poppins_bold"
+            android:textSize="22sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="28dp">
+        </com.google.android.material.button.MaterialButton>
+    </LinearLayout>
+
+</FrameLayout>
+
+<!--    Image by Freepik-->

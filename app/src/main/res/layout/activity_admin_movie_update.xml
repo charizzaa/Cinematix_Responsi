@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/darkbrown"
+    tools:context=".AdminMovieAdd">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:orientation="vertical"
+        android:id="@+id/updateMovie"
+        tools:ignore="MissingConstraints">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update Movie"
+            android:textSize="34sp"
+            android:textColor="@color/prime"
+            android:fontFamily="@font/poppins_extrabold"
+            android:layout_gravity="center_horizontal">
+        </TextView>
+        <View
+            android:layout_width="350dp"
+            android:layout_height="2dp"
+            android:background="@color/prime"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/starter"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/line"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/movieUpdate"
+        android:paddingHorizontal="48dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/updateMovie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/adminListUpdateImage"
+            android:layout_width="match_parent"
+            android:layout_height="196dp"
+            app:cardCornerRadius="16dp"
+            app:cardUseCompatPadding="true">
+
+            <ImageView
+                android:id="@+id/imageViewUpdate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_add" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/adminListUpdateTitle"
+            android:layout_marginTop="36dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded2"
+            android:hint="Title"
+            android:textColor="@color/darkbrown"
+            android:fontFamily="@font/poppins_regular"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="12dp"
+            android:layout_gravity="center"/>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/adminListUpdateAuthor"
+            android:layout_marginTop="18dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded2"
+            android:hint="Author"
+            android:textColor="@color/darkbrown"
+            android:fontFamily="@font/poppins_regular"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="12dp"
+            android:layout_gravity="center"/>
+        <com.google.android.material.textfield.TextInputEditText
+            android:height="144dp"
+            android:id="@+id/adminListUpdateDescription"
+            android:layout_marginTop="18dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded2"
+            android:hint="Description"
+            android:textColor="@color/darkbrown"
+            android:fontFamily="@font/poppins_regular"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="12dp"
+            android:layout_gravity="center"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/adminListUpdateButton"
+            android:layout_marginTop="36dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded"
+            android:text="Update Item"
+            android:textSize="20sp"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:fontFamily="@font/poppins_extrabold"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="12dp"
+            android:gravity="center"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
