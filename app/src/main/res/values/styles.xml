@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="CustomTabStyle">
-        <item name="android:textSize">10sp</item>
+    <style name="MyTabLayoutStyle" parent="Widget.Design.TabLayout">
+        <!-- Warna indicator tab -->
+        <item name="tabIndicatorColor">@color/darkbrown</item>
+
+        <!-- Warna teks tab -->
+        <item name="tabTextColor">@color/material_on_background_emphasis_medium</item>
+        <item name="tabSelectedTextColor">@color/yellow</item>
     </style>
+
 </resources>

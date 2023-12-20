@@ -1,10 +1,20 @@
 package com.example.cinematix_responsi
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.cinematix_responsi.databinding.FragmentUserHomeBinding
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +31,12 @@ class HomeFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private lateinit var binding : FragmentUserHomeBinding
+    private lateinit var database : DatabaseReference
+    private lateinit var recyclerViewItem : RecyclerView
+    private lateinit var itemAdapter : RecyclerViewAdapterUser
+    private lateinit var itemList : ArrayList<Item>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -33,8 +49,38 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_home, container, false)
+        binding = FragmentUserHomeBinding.inflate(layoutInflater)
+
+        recyclerViewItem = binding.userRecyclerView
+        recyclerViewItem.setHasFixedSize(true)
+        recyclerViewItem.layoutManager = LinearLayoutManager(requireActivity())
+
+        itemList = arrayListOf()
+        itemAdapter = RecyclerViewAdapterUser(itemList)
+        recyclerViewItem.adapter = itemAdapter
+
+        database = FirebaseDatabase.getInstance().getReference("Admin")
+        database.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                // Iterate through the snapshot and add items to the list
+                for (dataSnapshot in snapshot.children) {
+                    val item = dataSnapshot.getValue(Item::class.java)
+                    if (item != null) {
+                        itemList.add(item)
+                    }
+                }
+
+                // Notify the adapter that the data has changed
+                itemAdapter.notifyDataSetChanged()
+                Log.d("msg",itemList.size.toString())
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(requireActivity(), "Data retrieval failed!", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        return binding.root
     }
 
     companion object {

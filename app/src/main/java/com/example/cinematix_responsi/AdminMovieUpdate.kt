@@ -46,7 +46,7 @@ class AdminMovieUpdate : AppCompatActivity() {
         val description = binding.adminListUpdateDescription
 
         val originalImageUrl = intent.getStringExtra("imgId")
-        Glide.with(this)
+        Glide.with(this@AdminMovieUpdate)
             .load(originalImageUrl)
             .skipMemoryCache(true) // Skip caching in memory
             .diskCacheStrategy(DiskCacheStrategy.NONE) // Skip caching on disk
@@ -62,7 +62,7 @@ class AdminMovieUpdate : AppCompatActivity() {
         }
 
         binding.backButton.setOnClickListener{
-            startActivity(Intent(this, AdminMainHome::class.java))
+            startActivity(Intent(this@AdminMovieUpdate, AdminMainHome::class.java))
         }
     }
 
@@ -92,15 +92,15 @@ class AdminMovieUpdate : AppCompatActivity() {
                             binding.adminListUpdateTitle.text!!.clear()
                             binding.adminListUpdateAuthor.text!!.clear()
                             binding.adminListUpdateDescription.text!!.clear()
-                            startActivity(Intent(this,AdminMainHome::class.java))
-                            Toast.makeText(this, "Data Uploaded Successfully", Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(this@AdminMovieUpdate,AdminMainHome::class.java))
+                            Toast.makeText(this@AdminMovieUpdate, "Data Uploaded Successfully", Toast.LENGTH_SHORT).show()
                         }
                         .addOnFailureListener {
-                            Toast.makeText(this, "Adding Data Failed!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@AdminMovieUpdate, "Adding Data Failed!", Toast.LENGTH_SHORT).show()
                         }
                 }
             }.addOnFailureListener {
-                Toast.makeText(this, "Image Upload Failed!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@AdminMovieUpdate, "Image Upload Failed!", Toast.LENGTH_SHORT).show()
             }
         } else {
             // If no new image is selected, update the data without uploading a new image
@@ -119,10 +119,10 @@ class AdminMovieUpdate : AppCompatActivity() {
                     binding.adminListUpdateTitle.text!!.clear()
                     binding.adminListUpdateAuthor.text!!.clear()
                     binding.adminListUpdateDescription.text!!.clear()
-                    Toast.makeText(this, "Data Updated Successfully", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@AdminMovieUpdate, "Data Updated Successfully", Toast.LENGTH_SHORT).show()
                 }
                 .addOnFailureListener {
-                    Toast.makeText(this, "Updating Data Failed!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@AdminMovieUpdate, "Updating Data Failed!", Toast.LENGTH_SHORT).show()
                 }
         }
     }

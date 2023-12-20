@@ -13,25 +13,7 @@
         android:theme="@style/Theme.Cinematix_Responsi"
         tools:targetApi="31">
         <activity
-            android:name=".AdminMovieUpdate"
-            android:exported="false" />
-        <activity
-            android:name=".AdminMovieAdd"
-            android:exported="false" />
-        <activity
-            android:name=".AdminMainHome"
-            android:exported="false" />
-        <activity
-            android:name=".MovieDetailsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".UserMainMenu"
-            android:exported="false" />
-        <activity
             android:name=".SplashActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,6 +21,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".UserMainMenu"
+            android:exported="false" />
+        <activity
+            android:name=".MovieDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminMainHome"
+            android:exported="false" />
+        <activity
+            android:name=".AdminMovieAdd"
+            android:exported="false" />
+        <activity
+            android:name=".AdminMovieUpdate"
+            android:exported="false" />
+
     </application>
 
 </manifest>

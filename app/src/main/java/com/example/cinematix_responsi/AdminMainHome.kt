@@ -8,6 +8,9 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cinematix_responsi.databinding.ActivityAdminMainHomeBinding
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -16,6 +19,7 @@ import com.google.firebase.database.ValueEventListener
 import java.util.ArrayList
 
 class AdminMainHome : AppCompatActivity() {
+    private lateinit var auth: FirebaseAuth
     private lateinit var binding : ActivityAdminMainHomeBinding
     private lateinit var database : DatabaseReference
     private lateinit var itemAdapter : RecyclerViewAdapterAdmin
@@ -38,6 +42,11 @@ class AdminMainHome : AppCompatActivity() {
         with(binding){
             adminAddButton.setOnClickListener{
                 startActivity(Intent(this@AdminMainHome,AdminMovieAdd::class.java))
+            }
+            logoutButton.setOnClickListener{
+                auth = Firebase.auth
+                auth.signOut()
+                startActivity(Intent(this@AdminMainHome,SplashActivity::class.java))
             }
         }
 
@@ -68,4 +77,6 @@ class AdminMainHome : AppCompatActivity() {
 
 
     }
-}
+
+
+    }

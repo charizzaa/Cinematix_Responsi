@@ -52,7 +52,7 @@ class AdminMovieAdd : AppCompatActivity() {
         }
 
         binding.backButton.setOnClickListener{
-            startActivity(Intent(this, AdminMainHome::class.java))
+            startActivity(Intent(this@AdminMovieAdd, AdminMainHome::class.java))
         }
     }
 
@@ -87,18 +87,18 @@ class AdminMovieAdd : AppCompatActivity() {
 
 //                            showNotification("Data Uploaded Successfully")
 
-                            startActivity(Intent(this,AdminMainHome::class.java))
-                            Toast.makeText(this, "Data Uploaded Successfully", Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(this@AdminMovieAdd,AdminMainHome::class.java))
+                            Toast.makeText(this@AdminMovieAdd, "Data Uploaded Successfully", Toast.LENGTH_SHORT).show()
                         }
                         .addOnFailureListener {
-                            Toast.makeText(this, "Adding Data Failed!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@AdminMovieAdd, "Adding Data Failed!", Toast.LENGTH_SHORT).show()
                         }
                 }
             }.addOnFailureListener {
-                Toast.makeText(this, "Image Upload Failed!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@AdminMovieAdd, "Image Upload Failed!", Toast.LENGTH_SHORT).show()
             }
         } else {
-            Toast.makeText(this, "Please fill in all fields and select an image", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@AdminMovieAdd, "Please fill in all fields and select an image", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -108,7 +108,7 @@ class AdminMovieAdd : AppCompatActivity() {
 
         createNotificationChannel()
 
-        val builder = NotificationCompat.Builder(this, channelId)
+        val builder = NotificationCompat.Builder(this@AdminMovieAdd, channelId)
             .setSmallIcon(R.drawable.ic_notifications)
             .setContentTitle("PPAPB UAS Notification")
             .setContentText(message)

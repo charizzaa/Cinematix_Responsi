@@ -22,7 +22,7 @@ class MovieDetailsActivity : AppCompatActivity() {
         val detailDescription = binding.detailDescription
 
         val originalImageUrl = intent.getStringExtra("imgId")
-        Glide.with(this)
+        Glide.with(this@MovieDetailsActivity)
             .load(originalImageUrl)
             .skipMemoryCache(true) // Skip caching in memory
             .diskCacheStrategy(DiskCacheStrategy.NONE) // Skip caching on disk
