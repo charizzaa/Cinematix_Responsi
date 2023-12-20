@@ -37,6 +37,9 @@
                 android:layout_marginVertical="12dp"
                 android:hint="Username"
                 android:fontFamily="@font/poppins_regular"
+
+                android:textColorHint="@color/material_dynamic_neutral_variant50"
+                android:textColor="@color/darkbrown"
                 android:paddingLeft="32dp"
                 android:textSize="16sp"
                 />
@@ -49,6 +52,8 @@
                 android:hint="Email"
                 android:paddingLeft="32dp"
                 android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/darkbrown"
+                android:textColorHint="@color/material_dynamic_neutral_variant50"
                 android:textSize="16sp"
                 />
             <com.google.android.material.textfield.TextInputEditText
@@ -57,7 +62,9 @@
                 android:layout_height="50dp"
                 android:background="@drawable/input"
                 android:layout_marginVertical="12dp"
+                android:textColor="@color/darkbrown"
                 android:inputType="textPassword"
+                android:textColorHint="@color/material_dynamic_neutral_variant50"
                 android:hint="Password"
                 android:paddingLeft="32dp"
                 android:fontFamily="@font/poppins_regular"

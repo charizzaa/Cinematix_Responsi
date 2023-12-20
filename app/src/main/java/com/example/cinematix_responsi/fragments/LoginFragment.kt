@@ -74,7 +74,7 @@ class LoginFragment : Fragment() {
                         if (currentUser != null) {
                             // Save user credentials in SharedPreferences
                             // Check if the user is an admin based on their email address
-                            if (currentUser.email == "admindev@gmail.com") {
+                            if (currentUser.email == "admincaca@gmail.com") {
                                 // User is an admin, redirect to Admin activity
                                 editor.putString("email", email.text.toString())
                                 editor.putString("password", password.text.toString())

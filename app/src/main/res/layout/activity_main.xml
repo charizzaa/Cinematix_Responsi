@@ -13,7 +13,7 @@
         android:layout_height="50dp"
         app:tabMode="fixed"
         app:tabIndicatorAnimationMode="elastic"
-        app:tabTextColor="@color/darkbrown"
+        app:tabTextColor="@color/prime"
         app:tabIndicatorFullWidth="true"
         app:tabSelectedTextColor="@color/yellow"
         app:tabIndicatorColor="@color/prime"

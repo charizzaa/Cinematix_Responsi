@@ -40,7 +40,7 @@
             android:layout_marginTop="20dp">
         </TextView>
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/logout"
+            android:id="@+id/logoutButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:backgroundTint="#B80000"
