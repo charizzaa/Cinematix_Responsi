@@ -34,18 +34,17 @@ class MainActivity : AppCompatActivity() {
 
         // Mengakses Shared Preferences untuk mendapatkan data pengguna yang sudah login
         val sharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE)
-        val savedEmail = sharedPreferences.getString("email", null)
-        val savedUsername = sharedPreferences.getString("username", null)
+        val loggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
+        val userType = sharedPreferences.getString("userType", "guest")
 
         // Mengecek apakah ada pengguna yang sudah login
-        if (savedEmail != null) {
-            if (savedEmail == "admincaca@gmail.com") {
-                // User is an admin, redirect to Admin activity
-                startActivity(Intent(this@MainActivity, AdminMainHome::class.java))
-            } else {
-                // User is not an admin, redirect to User activity
-                startActivity(Intent(this@MainActivity, UserMainMenu::class.java))
+        if (loggedIn){
+            if(userType.equals("admin")){
+                startActivity(Intent(this,AdminMainHome::class.java))
+            }else {
+                startActivity(Intent(this,UserMainMenu::class.java))
             }
+
         }
 
         // Mengatur adapter untuk viewPager dan konfigurasi tabLayout

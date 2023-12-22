@@ -47,18 +47,16 @@ class AdminMainHome : AppCompatActivity() {
             adminAddButton.setOnClickListener {
                 startActivity(Intent(this@AdminMainHome, AdminMovieAdd::class.java))
             }
+            auth = Firebase.auth
             logoutButton.setOnClickListener {
-                logoutButton.setOnClickListener {
-                    auth = Firebase.auth
-                    auth.signOut()
-                    val sharedPreference = getSharedPreferences("user_data", Context.MODE_PRIVATE)
-                    sharedPreference.edit().remove("email").apply()
 
+                val sharedPreference = getSharedPreferences("user_data", Context.MODE_PRIVATE)
+                sharedPreference.edit().putBoolean("isLoggedIn", false).apply()
 
-                    val intent = Intent(this@AdminMainHome, SplashActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                }
+                auth.signOut()
+                val intent = Intent(this@AdminMainHome, SplashActivity::class.java)
+                startActivity(intent)
+            }
 
 
             }
@@ -93,4 +91,4 @@ class AdminMainHome : AppCompatActivity() {
 
         }
     }
-}
+

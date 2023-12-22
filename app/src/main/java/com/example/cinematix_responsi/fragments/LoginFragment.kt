@@ -8,12 +8,14 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat.getSystemService
 import com.example.cinematix_responsi.AdminMainHome
@@ -69,16 +71,18 @@ class LoginFragment : Fragment() {
 
         val email: TextInputEditText = binding.username
         val password: TextInputEditText = binding.password
-        val loginBtn : Button = binding.loginbtn
+        val loginBtn : AppCompatButton = binding.loginbtn
         
         // Check if user credentials are saved in SharedPreferences
         val sharedPreferences = requireActivity().getSharedPreferences("user_data", Context.MODE_PRIVATE)
         val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
         val editor = sharedPreferences.edit()
 
+
         if (isLoggedIn) {
             // User is already logged in, navigate to the appropriate screen
             val userType = sharedPreferences.getString("userType", "guest")
+            navigateToMainMenu(userType)
         } else {
             // Cek apakah form telah diisi
             loginBtn.setOnClickListener {
@@ -88,6 +92,7 @@ class LoginFragment : Fragment() {
                 if (password.text.toString().isEmpty()) {
                     Toast.makeText(requireActivity(), "Please Fill the Email!", Toast.LENGTH_SHORT).show()
                 }
+
 
                 // Mencoba masuk dengan email dan kata sandi yang diberikan.
                 // Mendapatkan informasi pengguna saat ini setelah masuk.
@@ -106,7 +111,8 @@ class LoginFragment : Fragment() {
                                 editor.putBoolean("isLoggedIn", true)
                                 editor.putString("userType", userType)
                                 editor.apply()
-                                
+
+
                                 //Navigate to the appropriate screen
                                 navigateToMainMenu(userType)
                             }
@@ -124,7 +130,7 @@ class LoginFragment : Fragment() {
     private fun navigateToMainMenu(userType: String?) {
         val intentTo = when (userType){
             "admin" -> Intent(requireActivity(), AdminMainHome::class.java)
-            "user" -> Intent(requireActivity(), HomeFragment::class.java)
+            "user" -> Intent(requireActivity(), UserMainMenu::class.java)
             else -> null
         }
         startActivity(intentTo!!)
