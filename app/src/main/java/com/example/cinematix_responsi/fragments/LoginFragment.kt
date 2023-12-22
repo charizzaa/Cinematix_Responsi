@@ -96,9 +96,11 @@ class LoginFragment : Fragment() {
                         val currentUser = auth.currentUser
                         if (taskk.isSuccessful) {
                             if (currentUser != null) {
+                                // Jika email sama, maka role adalah admin
                                 val userType = if(currentUser.email == "admincaca@gmail.com"){
                                     "admin"
                                 } else {
+                                    // Jika email beda, maka role adalah user
                                     "user"
                                 }
                                 editor.putBoolean("isLoggedIn", true)
@@ -118,6 +120,7 @@ class LoginFragment : Fragment() {
         return binding.root
     }
 
+    // Fungsi untuk mengarahkan pengguna ke menu terkait berdasarkan role
     private fun navigateToMainMenu(userType: String?) {
         val intentTo = when (userType){
             "admin" -> Intent(requireActivity(), AdminMainHome::class.java)
