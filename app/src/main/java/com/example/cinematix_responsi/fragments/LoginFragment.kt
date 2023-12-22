@@ -17,6 +17,7 @@ import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat.getSystemService
 import com.example.cinematix_responsi.AdminMainHome
+import com.example.cinematix_responsi.HomeFragment
 import com.example.cinematix_responsi.NotifReceiver
 import com.example.cinematix_responsi.R
 import com.example.cinematix_responsi.UserMainMenu
@@ -72,49 +73,58 @@ class LoginFragment : Fragment() {
         
         // Check if user credentials are saved in SharedPreferences
         val sharedPreferences = requireActivity().getSharedPreferences("user_data", Context.MODE_PRIVATE)
-        val savedEmail = sharedPreferences.getString("email", null)
-        val savedPassword = sharedPreferences.getString("password", null)
+        val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
         val editor = sharedPreferences.edit()
 
-        // Cek apakah form telah diisi
-        loginBtn.setOnClickListener {
-            if (email.text.toString().isEmpty()) {
-                Toast.makeText(requireActivity(), "Please Fill the Email!", Toast.LENGTH_SHORT).show()
-            }
-            if (password.text.toString().isEmpty()) {
-                Toast.makeText(requireActivity(), "Please Fill the Email!", Toast.LENGTH_SHORT).show()
-            }
-
-            // Mencoba masuk dengan email dan kata sandi yang diberikan.
-            // Mendapatkan informasi pengguna saat ini setelah masuk.
-            auth.signInWithEmailAndPassword(email.text.toString(), password.text.toString())
-                .addOnCompleteListener(requireActivity()) { taskk ->
-                    val currentUser = auth.currentUser
-                    if (taskk.isSuccessful) {
-                        if (currentUser != null) {
-                            // Save user credentials in SharedPreferences
-                            // Check if the user is an admin based on their email address
-                            if (currentUser.email == "admincaca@gmail.com") {
-                                // User is an admin, redirect to Admin activity
-                                editor.putString("email", email.text.toString())
-                                editor.putString("password", password.text.toString())
-                                editor.apply()
-                                startActivity(Intent(requireActivity(), AdminMainHome::class.java))
-
-                                showNotification()
-                            } else {
-                                // User is not an admin, redirect to User activity
-                                startActivity(Intent(requireActivity(), UserMainMenu::class.java))
-
-                                showNotification()
-                            }
-                        }
-                    } else {
-                        Toast.makeText(requireActivity(), "Login Failed", Toast.LENGTH_SHORT).show()
-                    }
+        if (isLoggedIn) {
+            // User is already logged in, navigate to the appropriate screen
+            val userType = sharedPreferences.getString("userType", "guest")
+        } else {
+            // Cek apakah form telah diisi
+            loginBtn.setOnClickListener {
+                if (email.text.toString().isEmpty()) {
+                    Toast.makeText(requireActivity(), "Please Fill the Email!", Toast.LENGTH_SHORT).show()
                 }
+                if (password.text.toString().isEmpty()) {
+                    Toast.makeText(requireActivity(), "Please Fill the Email!", Toast.LENGTH_SHORT).show()
+                }
+
+                // Mencoba masuk dengan email dan kata sandi yang diberikan.
+                // Mendapatkan informasi pengguna saat ini setelah masuk.
+                auth.signInWithEmailAndPassword(email.text.toString(), password.text.toString())
+                    .addOnCompleteListener(requireActivity()) { taskk ->
+                        val currentUser = auth.currentUser
+                        if (taskk.isSuccessful) {
+                            if (currentUser != null) {
+                                val userType = if(currentUser.email == "admincaca@gmail.com"){
+                                    "admin"
+                                } else {
+                                    "user"
+                                }
+                                editor.putBoolean("isLoggedIn", true)
+                                editor.putString("userType", userType)
+                                editor.apply()
+                                
+                                //Navigate to the appropriate screen
+                                navigateToMainMenu(userType)
+                            }
+                        } else {
+                            Toast.makeText(requireActivity(), "Login Failed", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+            }
+        
         }
         return binding.root
+    }
+
+    private fun navigateToMainMenu(userType: String?) {
+        val intentTo = when (userType){
+            "admin" -> Intent(requireActivity(), AdminMainHome::class.java)
+            "user" -> Intent(requireActivity(), HomeFragment::class.java)
+            else -> null
+        }
+        startActivity(intentTo!!)
     }
 
     // Fungsi menampilkan notifikasi
