@@ -1,5 +1,7 @@
 package com.example.cinematix_responsi
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -23,6 +25,18 @@ class MainActivity : AppCompatActivity() {
         viewPager = findViewById(R.id.viewPager)
 
         val selectedTab = intent.getIntExtra("SELECTED_TAB", 0)
+        val sharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE)
+        val savedEmail = sharedPreferences.getString("email", null)
+        val savedUsername = sharedPreferences.getString("username", null)
+        if (savedEmail != null) {
+            if (savedEmail == "admincaca@gmail.com") {
+                // User is an admin, redirect to Admin activity
+                startActivity(Intent(this@MainActivity, AdminMainHome::class.java))
+            } else {
+                // User is not an admin, redirect to User activity
+                startActivity(Intent(this@MainActivity, UserMainMenu::class.java))
+            }
+        }
         with(binding) {
             viewPager.adapter = TabAdapter(this@MainActivity)
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->

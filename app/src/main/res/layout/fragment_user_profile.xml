@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ProfileFragment"
-    android:background="@color/darkbrown">
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,29 +16,78 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_extrabold"
-            android:textSize="34sp"
+            android:textSize="38sp"
             android:text="Welcome!"
             android:layout_gravity="center_horizontal"
-            android:textColor="@color/prime"
+            android:textColor="@color/darkbrown"
             android:layout_marginBottom="20dp">
         </TextView>
         <ImageView
             android:layout_width="300dp"
             android:layout_height="300dp"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/profile">
+            android:src="@drawable/profile"
+            android:layout_marginBottom="30dp">
         </ImageView>
-        <TextView
-            android:id="@+id/tvUser"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_semibold"
-            android:text="cacantik"
-            android:textSize="28sp"
-            android:textColor="@color/prime"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp">
-        </TextView>
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_person"
+                    android:background="@drawable/rounded"
+                    android:layout_marginRight="30dp">
+                </ImageView>
+                <TextView
+                    android:id="@+id/tvEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="cacantik"
+                    android:layout_marginVertical="5dp"
+                    android:textSize="22sp"
+                    android:textColor="@color/darkbrown"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp">
+                </TextView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="10dp">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_email"
+                    android:background="@drawable/rounded"
+                    android:layout_marginRight="30dp">
+                </ImageView>
+                <TextView
+                    android:id="@+id/tvUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="cacacantik@gmail.com"
+                    android:layout_marginVertical="5dp"
+                    android:textSize="22sp"
+                    android:textColor="@color/darkbrown"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp">
+                </TextView>
+            </LinearLayout>
+        </LinearLayout>
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/logoutButton"
             android:layout_width="wrap_content"

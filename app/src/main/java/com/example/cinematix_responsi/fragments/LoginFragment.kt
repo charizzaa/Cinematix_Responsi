@@ -12,10 +12,12 @@ import android.widget.Toast
 import com.example.cinematix_responsi.AdminMainHome
 import com.example.cinematix_responsi.UserMainMenu
 import com.example.cinematix_responsi.databinding.FragmentLoginBinding
+import com.example.cinematix_responsi.databinding.FragmentRegisterBinding
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.google.firebase.firestore.FirebaseFirestore
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
