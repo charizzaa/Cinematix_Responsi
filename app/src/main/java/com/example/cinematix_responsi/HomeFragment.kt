@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,7 +29,7 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
+ * Use the [Home2Fragment.newInstance] factory method to
  * create an instance of this fragment.
  */
 class HomeFragment : Fragment() {
@@ -40,10 +41,9 @@ class HomeFragment : Fragment() {
     private lateinit var database : DatabaseReference
     private lateinit var recyclerViewItem : RecyclerView
     private lateinit var itemAdapter : RecyclerViewAdapterUser
-    private lateinit var itemList : ArrayList<Item>
+//    private lateinit var itemList : ArrayList<ItemData>
 
     private lateinit var dao: ItemDao
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,15 +57,17 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // Inflate the layout for this fragment
         binding = FragmentUserHomeBinding.inflate(layoutInflater)
 
         recyclerViewItem = binding.userRecyclerView
         recyclerViewItem.setHasFixedSize(true)
         recyclerViewItem.layoutManager = LinearLayoutManager(requireActivity())
 
-        itemList = arrayListOf()
         itemAdapter = RecyclerViewAdapterUser(emptyList())
         recyclerViewItem.adapter = itemAdapter
+
+
 
         // Initialize Room database
         dao = ItemRoomDatabase.getDatabase(requireContext()).dao()
@@ -77,22 +79,10 @@ class HomeFragment : Fragment() {
         fetchFilmFromFirebase()
 
 
-        // Observe changes in the LiveData from Room and update the adapter
-        dao.getAllFilm().observe(viewLifecycleOwner, Observer { films ->
-            // Log the data
-            for (film in films) {
-                Log.d(
-                    "FilmData",
-                    "ID: ${film.id}, Title: ${film.title}, Author: ${film.author}, Description: ${film.description}, ImageURL: ${film.imageUrl}"
-                )
-            }
-
-            // Update the adapter
-            itemAdapter.updateData(films)
-        })
-
         return binding.root
     }
+
+
     private fun fetchFilmFromFirebase() {
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -100,6 +90,7 @@ class HomeFragment : Fragment() {
 
                 for (dataSnapshot in snapshot.children) {
                     val filmEntity = dataSnapshot.getValue(ItemDatabase::class.java)
+                    Log.e("eror",dataSnapshot.toString())
                     filmEntity?.let { filmList.add(it) }
                 }
 
@@ -125,6 +116,9 @@ class HomeFragment : Fragment() {
 
     }
 
+
+
+
     companion object {
         /**
          * Use this factory method to create a new instance of
@@ -132,7 +126,7 @@ class HomeFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
+         * @return A new instance of fragment Home2Fragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic

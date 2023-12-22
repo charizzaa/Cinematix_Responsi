@@ -102,7 +102,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/starter"
-        tools:listitem="@layout/item_user" />
+        tools:listitem="@layout/item_user"
+        android:paddingBottom="150dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
