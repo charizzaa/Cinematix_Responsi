@@ -6,15 +6,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.cinematix_responsi.database.ItemDao
+import com.example.cinematix_responsi.database.ItemRoomDatabase
 import com.example.cinematix_responsi.databinding.FragmentUserHomeBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,6 +42,9 @@ class HomeFragment : Fragment() {
     private lateinit var itemAdapter : RecyclerViewAdapterUser
     private lateinit var itemList : ArrayList<Item>
 
+    private lateinit var dao: ItemDao
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -56,31 +64,65 @@ class HomeFragment : Fragment() {
         recyclerViewItem.layoutManager = LinearLayoutManager(requireActivity())
 
         itemList = arrayListOf()
-        itemAdapter = RecyclerViewAdapterUser(itemList)
+        itemAdapter = RecyclerViewAdapterUser(emptyList())
         recyclerViewItem.adapter = itemAdapter
 
+        // Initialize Room database
+        dao = ItemRoomDatabase.getDatabase(requireContext()).dao()
+
+        // Initialize Firebase reference
         database = FirebaseDatabase.getInstance().getReference("Admin")
-        database.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                // Iterate through the snapshot and add items to the list
-                for (dataSnapshot in snapshot.children) {
-                    val item = dataSnapshot.getValue(Item::class.java)
-                    if (item != null) {
-                        itemList.add(item)
-                    }
-                }
 
-                // Notify the adapter that the data has changed
-                itemAdapter.notifyDataSetChanged()
-                Log.d("msg",itemList.size.toString())
+        // Fetch data from Firebase and update itemList
+        fetchFilmFromFirebase()
+
+
+        // Observe changes in the LiveData from Room and update the adapter
+        dao.getAllFilm().observe(viewLifecycleOwner, Observer { films ->
+            // Log the data
+            for (film in films) {
+                Log.d(
+                    "FilmData",
+                    "ID: ${film.id}, Title: ${film.title}, Author: ${film.author}, Description: ${film.description}, ImageURL: ${film.imageUrl}"
+                )
             }
 
-            override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(requireActivity(), "Data retrieval failed!", Toast.LENGTH_SHORT).show()
-            }
+            // Update the adapter
+            itemAdapter.updateData(films)
         })
 
         return binding.root
+    }
+    private fun fetchFilmFromFirebase() {
+        database.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val filmList = mutableListOf<ItemDatabase>()
+
+                for (dataSnapshot in snapshot.children) {
+                    val filmEntity = dataSnapshot.getValue(ItemDatabase::class.java)
+                    filmEntity?.let { filmList.add(it) }
+                }
+
+                // Update Room database with the new data from Firebase
+                GlobalScope.launch(Dispatchers.IO) {
+                    dao.deleteAllFilm()
+                    dao.insertFilm(filmList)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle the error if needed
+            }
+        })
+
+        // Observe changes in the LiveData from Room and update the adapter
+        dao.getAllFilm().observe(viewLifecycleOwner, Observer { films ->
+            itemAdapter.updateData(films)
+        })
+
+
+
+
     }
 
     companion object {

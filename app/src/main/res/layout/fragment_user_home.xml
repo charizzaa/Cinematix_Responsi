@@ -68,17 +68,41 @@
             android:layout_below="@+id/starter"
             android:layout_gravity="center_horizontal"
             android:id="@+id/line"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Made for You"
+                android:fontFamily="@font/poppins_bold"
+                android:textColor="@color/prime"
+                android:textSize="20sp">
+            </TextView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="See All"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/yellow"
+                android:textSize="20sp"
+                android:layout_marginLeft="50dp"
+                android:textAlignment="viewEnd">
+            </TextView>
+        </LinearLayout>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        app:layout_constraintTop_toBottomOf="@id/starter"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp"
+        android:id="@+id/userRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        tools:listitem="@layout/item_user"
-        android:id="@+id/userRecyclerView"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/starter"
+        tools:listitem="@layout/item_user" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
