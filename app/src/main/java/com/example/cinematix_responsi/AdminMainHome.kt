@@ -32,10 +32,13 @@ class AdminMainHome : AppCompatActivity() {
         binding = ActivityAdminMainHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Menginisialisasi variabel recyclerViewItem dengan elemen RecyclerView dari layout.
         recyclerViewItem = binding.adminRecyclerView
         recyclerViewItem.setHasFixedSize(true)
         recyclerViewItem.layoutManager = LinearLayoutManager(this)
 
+        // Inisialisasi itemAdapter dengan RecyclerViewAdapterAdmin yang menggunakan itemList.
+        // Menetapkan adapter RecyclerView untuk menggunakan itemAdapter.
         itemList = arrayListOf()
         itemAdapter = RecyclerViewAdapterAdmin(itemList)
         recyclerViewItem.adapter = itemAdapter
@@ -60,6 +63,7 @@ class AdminMainHome : AppCompatActivity() {
 
             }
 
+            // Menginisialisasi objek DatabaseReference untuk "Admin" di Firebase Realtime Database.
             database = FirebaseDatabase.getInstance().getReference("Admin")
             database.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {

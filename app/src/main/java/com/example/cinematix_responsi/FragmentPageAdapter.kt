@@ -11,6 +11,7 @@ class TabAdapter(act:AppCompatActivity) : FragmentStateAdapter(act) {
         return 2
     }
 
+    // Mengatur navigasi tab layout
     override fun createFragment(position: Int): Fragment {
         return when(position) {
             0 -> LoginFragment()

@@ -30,6 +30,9 @@ private const val ARG_PARAM2 = "param2"
 class RegisterFragment : Fragment() {
     private lateinit var binding : FragmentRegisterBinding
     private lateinit var auth: FirebaseAuth
+
+    // Menginisialisasi variabel sharePreferences untuk mengelola data
+    // yang disimpan di SharedPreferences.
     private lateinit var sharePreferences : SharedPreferences
 
     private var param1: String? = null
@@ -51,6 +54,7 @@ class RegisterFragment : Fragment() {
         binding = FragmentRegisterBinding.inflate(inflater, container, false)
         auth = Firebase.auth
 
+        // Inisialisasi sharePreferences untuk mengelola data pengguna di SharedPreferences.
         sharePreferences = requireActivity().getSharedPreferences("user_data",Context.MODE_PRIVATE)
         val editor = sharePreferences.edit()
 
@@ -59,6 +63,7 @@ class RegisterFragment : Fragment() {
         val password: TextInputEditText = binding.registerPasswordText
         val registerNow: Button = binding.btnRegister
 
+        // Cek apakah form telah diisi
         registerNow.setOnClickListener {
             if (email.text.toString().isEmpty()){
                 Toast.makeText(requireActivity(),"PLEASE FILL THE EMAIl",Toast.LENGTH_SHORT).show()
@@ -67,6 +72,9 @@ class RegisterFragment : Fragment() {
                 Toast.makeText(requireActivity(),"PLEASE FILL THE PASSWORD",Toast.LENGTH_SHORT).show()
             }
 
+            // Menangani hasil dari proses pembuatan pengguna baru.
+            // Jika berhasil, menyimpan data pengguna dan menampilkan pesan sukses,
+            // jika gagal menampilkan pesan gagal.
             auth.createUserWithEmailAndPassword(email.text.toString(), password.text.toString())
                 .addOnCompleteListener(requireActivity()) {task ->
                     if(task.isSuccessful){

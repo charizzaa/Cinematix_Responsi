@@ -33,6 +33,7 @@ class RecyclerViewAdapterAdmin(private val itemList : ArrayList<Item>) : Recycle
         return MyViewHolder(view)
     }
 
+    // Menghubungkan data dengan ViewHolder di posisi tertentu
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = itemList[position]
         holder.title.text = currentItem.title
@@ -45,6 +46,7 @@ class RecyclerViewAdapterAdmin(private val itemList : ArrayList<Item>) : Recycle
             .diskCacheStrategy(DiskCacheStrategy.NONE) // Skip caching on disk
             .into(holder.image)
 
+        // Menangani klik tombol edit pada setiap item
         holder.itemView.findViewById<ImageView>(R.id.eachItemEditButton).setOnClickListener{
             val intent = Intent(holder.itemView.context, AdminMovieUpdate::class.java)
             intent.putExtra("title", currentItem.title)
@@ -54,6 +56,7 @@ class RecyclerViewAdapterAdmin(private val itemList : ArrayList<Item>) : Recycle
             holder.itemView.context.startActivity(intent)
         }
 
+        // Menangani klik tombol delete pada setiap item
         holder.itemView.findViewById<ImageView>(R.id.eachItemDeleteButton).setOnClickListener {
             val itemToDelete = Uri.parse(itemList[position].imageUrl.toString()).lastPathSegment?.removePrefix("images/")
 

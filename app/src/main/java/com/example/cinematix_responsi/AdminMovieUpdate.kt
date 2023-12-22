@@ -76,7 +76,7 @@ class AdminMovieUpdate : AppCompatActivity() {
         if (imageUri != null) {
             // Generate a unique ID for the image
             val imageId = Uri.parse(intent.getStringExtra("imgId")).lastPathSegment?.removePrefix("images/")
-            Log.d("msg","ID NYA TUUUU $imageId")
+            Log.d("msg","ID Gambar: $imageId")
 
             // Upload image to Firebase Storage with the generated ID
             storageReference = FirebaseStorage.getInstance().reference.child("images/$imageId")

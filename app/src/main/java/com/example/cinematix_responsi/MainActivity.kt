@@ -13,21 +13,31 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
+    // Deklarasi variabel
     private lateinit var binding : ActivityMainBinding
     private lateinit var tabLayout : TabLayout
     private lateinit var viewPager : ViewPager2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Menginisialisasi binding
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Menginisialisasi tabLayout dan viewPager
         tabLayout = findViewById(R.id.tabLayout)
         viewPager = findViewById(R.id.viewPager)
 
+        // Mendapatkan nilai selectedTab dari intent
         val selectedTab = intent.getIntExtra("SELECTED_TAB", 0)
+
+        // Mengakses Shared Preferences untuk mendapatkan data pengguna yang sudah login
         val sharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE)
         val savedEmail = sharedPreferences.getString("email", null)
         val savedUsername = sharedPreferences.getString("username", null)
+
+        // Mengecek apakah ada pengguna yang sudah login
         if (savedEmail != null) {
             if (savedEmail == "admincaca@gmail.com") {
                 // User is an admin, redirect to Admin activity
@@ -37,6 +47,8 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this@MainActivity, UserMainMenu::class.java))
             }
         }
+
+        // Mengatur adapter untuk viewPager dan konfigurasi tabLayout
         with(binding) {
             viewPager.adapter = TabAdapter(this@MainActivity)
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->
@@ -51,11 +63,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        // Menampilkan menu pada toolbar
         menuInflater.inflate(R.menu.menu_loginregister, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Menangani item yang dipilih pada toolbar
         return when(item.itemId) {
             R.id.action_login -> {
                 Toast.makeText(this@MainActivity,"Login", Toast.LENGTH_SHORT).show()

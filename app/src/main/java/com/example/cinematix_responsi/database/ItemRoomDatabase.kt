@@ -11,6 +11,8 @@ abstract class ItemRoomDatabase : RoomDatabase() {
     abstract fun dao(): ItemDao
 
     companion object {
+        // Variabel volatil untuk menyimpan instans basis data.
+        // Volatile digunakan agar nilai variabel selalu terlihat.
         @Volatile
         private var INSTANCE: ItemRoomDatabase? = null
 

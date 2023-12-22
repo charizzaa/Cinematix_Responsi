@@ -13,27 +13,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 class RecyclerViewAdapterUser(private var itemList: List<ItemDatabase>) : RecyclerView
 .Adapter<RecyclerViewAdapterUser.MyViewHolder>() {
 
-//    companion object {
-//        private lateinit var adapter: RecyclerViewAdapterUser
-//
-//        fun initAdapterInstance(adapterInstance: RecyclerViewAdapterUser) {
-//            adapter = adapterInstance
-//        }
-//
-//        fun setFilteredList(filteredList: ArrayList<Item>) {
-//            adapter.itemList = filteredList
-//            adapter.notifyDataSetChanged() // Notify the adapter that the data has changed
-//        }
-//    }
-
-
-
-
-
-
-
-
-
     class MyViewHolder(itemList : View) : RecyclerView.ViewHolder(itemList){
         val title : TextView = itemList.findViewById(R.id.eachItemTextOneUser)
         val author : TextView = itemList.findViewById(R.id.eachItemTextTwoUser)
@@ -45,6 +24,7 @@ class RecyclerViewAdapterUser(private var itemList: List<ItemDatabase>) : Recycl
         return MyViewHolder(view)
     }
 
+    // Menghubungkan data dengan ViewHolder di posisi tertentu
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = itemList[position]
         holder.title.text = currentItem.title

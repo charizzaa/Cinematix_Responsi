@@ -14,6 +14,7 @@ class UserMainMenu : AppCompatActivity() {
         setContentView(binding.root)
         replaceFragment(HomeFragment())
 
+        // Menetapkan listener untuk item yang dipilih pada BottomNavigationView
         binding.bottomNavBar.setOnItemSelectedListener{
             when(it.itemId){
                 R.id.navHome -> replaceFragment(HomeFragment())
@@ -24,6 +25,8 @@ class UserMainMenu : AppCompatActivity() {
             true
         }
     }
+
+    // Fungsi untuk menggantikan fragment saat ini dengan fragment yang diberikan
     private fun replaceFragment(fragment: Fragment){
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()

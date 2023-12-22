@@ -63,6 +63,7 @@ class LoginFragment : Fragment() {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         auth = Firebase.auth
 
+        // Variabel untuk mengelola notifikasi
         notifManager = requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         val email: TextInputEditText = binding.username
@@ -75,6 +76,7 @@ class LoginFragment : Fragment() {
         val savedPassword = sharedPreferences.getString("password", null)
         val editor = sharedPreferences.edit()
 
+        // Cek apakah form telah diisi
         loginBtn.setOnClickListener {
             if (email.text.toString().isEmpty()) {
                 Toast.makeText(requireActivity(), "Please Fill the Email!", Toast.LENGTH_SHORT).show()
@@ -83,6 +85,8 @@ class LoginFragment : Fragment() {
                 Toast.makeText(requireActivity(), "Please Fill the Email!", Toast.LENGTH_SHORT).show()
             }
 
+            // Mencoba masuk dengan email dan kata sandi yang diberikan.
+            // Mendapatkan informasi pengguna saat ini setelah masuk.
             auth.signInWithEmailAndPassword(email.text.toString(), password.text.toString())
                 .addOnCompleteListener(requireActivity()) { taskk ->
                     val currentUser = auth.currentUser
@@ -113,6 +117,7 @@ class LoginFragment : Fragment() {
         return binding.root
     }
 
+    // Fungsi menampilkan notifikasi
     private fun showNotification() {
         val currentUser = Firebase.auth.currentUser
         val email = currentUser?.email

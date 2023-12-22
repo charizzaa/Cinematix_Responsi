@@ -16,11 +16,12 @@ class MovieDetailsActivity : AppCompatActivity() {
         binding = ActivityMovieDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
+        // Mengakses elemen UI
         val detailTitle = binding.detailTitle
         val detailAuthor = binding.detailAuthor
         val detailDescription = binding.detailDescription
 
+        // Mendapatkan URL gambar dari intent dan menggunakan Glide untuk menampilkan gambar
         val originalImageUrl = intent.getStringExtra("imgId")
         Glide.with(this@MovieDetailsActivity)
             .load(originalImageUrl)
@@ -28,6 +29,7 @@ class MovieDetailsActivity : AppCompatActivity() {
             .diskCacheStrategy(DiskCacheStrategy.NONE) // Skip caching on disk
             .into(binding.detailImg)
 
+        // Mengisi teks pada elemen UI dengan data yang diterima dari intent
         detailTitle.setText(intent.getStringExtra("title"))
         detailAuthor.setText(intent.getStringExtra("author"))
         detailDescription.setText(intent.getStringExtra("description"))

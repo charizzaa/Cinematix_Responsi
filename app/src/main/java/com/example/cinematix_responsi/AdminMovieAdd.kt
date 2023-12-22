@@ -85,7 +85,7 @@ class AdminMovieAdd : AppCompatActivity() {
                             binding.adminListAddAuthor.text!!.clear()
                             binding.adminListAddDescription.text!!.clear()
 
-//                            showNotification("Data Uploaded Successfully")
+                            showNotification("Data Uploaded Successfully")
 
                             startActivity(Intent(this@AdminMovieAdd,AdminMainHome::class.java))
                             Toast.makeText(this@AdminMovieAdd, "Data Uploaded Successfully", Toast.LENGTH_SHORT).show()
@@ -113,11 +113,6 @@ class AdminMovieAdd : AppCompatActivity() {
             .setContentTitle("PPAPB UAS Notification")
             .setContentText(message)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-
-//        with(NotificationManagerCompat.from(this)) {
-//            notify(notificationId, builder.build())
-//        }
-
     }
 
     private fun createNotificationChannel() {
